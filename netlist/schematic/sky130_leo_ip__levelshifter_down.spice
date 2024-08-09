@@ -1,0 +1,9 @@
+** sch_path: /home/leo/Projects/IPs/sky130_leo_ip__levelshifter/xschem/sky130_leo_ip__levelshifter_down.sch
+.subckt sky130_leo_ip__levelshifter_down VDDOUT OUT IN VGND
+*.PININFO IN:I VGND:B OUT:I VDDOUT:B
+XM3 OUT n VGND VGND sky130_fd_pr__nfet_01v8 L=0.15 W=0.42 nf=1 m=1
+XM4 OUT n VDDOUT VDDOUT sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM5 n IN VDDOUT VDDOUT sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=0.42 nf=1 m=1
+XM6 n IN VGND VGND sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=1 nf=1 m=1
+.ends
+.end

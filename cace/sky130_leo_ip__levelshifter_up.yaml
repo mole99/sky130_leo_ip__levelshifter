@@ -1,0 +1,204 @@
+name:           sky130_leo_ip__levelshifter_up
+description:    A simple levelshifter intended for 1.8V to 3.3V
+PDK:            sky130A
+
+cace_format:    5.0
+
+authorship:
+  designer:         Leo Moser
+  creation_date:    July 29, 2024
+  license:          Apache 2.0
+
+paths:
+  root:             ..
+  schematic:        xschem
+  layout:           gds
+  netlist:          netlist
+  documentation:    docs/sky130_leo_ip__levelshifter_up
+
+pins:
+  VGND:
+    description: Ground
+    type: ground
+    direction: inout
+  VDDIN:
+    description: Low Voltage
+    type: supply
+    direction: inout
+  VDDOUT:
+    description: High Voltage
+    type: supply
+    direction: inout
+  IN:
+    description: Input
+    type: signal
+    direction: input
+  OUT:
+    description: Output
+    type: signal
+    direction: output
+
+default_conditions:
+  vddin:
+    description: Input low voltage
+    display: Vddin
+    unit: V
+    typical: 1.8
+  vddout:
+    description: Output high voltage
+    display: Vddout
+    unit: V
+    typical: 3.3
+  cl:
+    description: Output load capacitance
+    display: CLoad
+    unit: fF
+    maximum: 10
+  corner:
+    description: Process corner
+    display: Corner
+    typical: tt
+  temperature:
+    description: Ambient temperature
+    display: Temp
+    unit: °C
+    typical: 27
+
+parameters:
+
+  rise_time:
+    description: Rise time from 10% to 90%
+    display: Rise time
+    unit: ns
+    spec:
+      minimum:
+        value: any
+      typical:
+        value: any
+      maximum:
+        value: any
+    tool:
+      ngspice:
+        template: rise_fall_up.sch
+        format: ascii
+        suffix: .data
+        variables: [result, null]
+    conditions:
+      cl:
+        minimum: 10
+        typical: 50
+        maximum: 100
+      corner:
+        enumerate: [tt, ff, ss] # fs, sf
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 130
+
+  fall_time:
+    description: Fall time from 90% to 10%
+    display: Fall time
+    unit: ns
+    spec:
+      minimum:
+        value: any
+      typical:
+        value: any
+      maximum:
+        value: any
+    tool:
+      ngspice:
+        template: rise_fall_up.sch
+        format: ascii
+        suffix: .data
+        variables: [null, result]
+    conditions:
+      cl:
+        minimum: 10
+        typical: 50
+        maximum: 100
+      corner:
+        enumerate: [tt, ff, ss] # fs, sf
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 130
+
+  area:
+    description: Total circuit layout area
+    display: Area
+    unit: µm²
+    spec:
+      maximum:
+        value: any
+    tool:
+      magic_area
+
+  width:
+    description: Total circuit layout width
+    display: Width
+    unit: µm
+    spec:
+      maximum:
+        value: any
+    tool:
+      magic_width
+
+  height:
+    description: Total circuit layout height
+    display: Height
+    unit: µm
+    spec:
+      maximum:
+        value: any
+    tool:
+      magic_height
+
+  magic_drc:
+    description: Magic DRC
+    display: Magic DRC
+    spec:
+      maximum:
+        value: 0
+    tool:
+      magic_drc:
+        gds_flatten: True
+
+  netgen_lvs:
+    description: Netgen LVS
+    display: Netgen LVS
+    spec:
+      maximum:
+        value: 0
+    tool:
+      netgen_lvs
+
+  klayout_drc_feol:
+    description: KLayout DRC feol
+    display: KLayout DRC feol
+    spec:
+      maximum:
+        value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true']
+
+  klayout_drc_beol:
+    description: KLayout DRC beol
+    display: KLayout DRC beol
+    spec:
+      maximum:
+        value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'beol=true']
+
+  klayout_drc_full:
+    description: KLayout DRC full
+    display: KLayout DRC full
+    spec:
+      maximum:
+        value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true', '-rd', 'beol=true', '-rd', 'offgrid=true']
