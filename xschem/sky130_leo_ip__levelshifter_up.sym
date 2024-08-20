@@ -22,7 +22,7 @@ L 7 -50 -60 -50 -40 {}
 L 7 0 40 0 60 {}
 B 5 47.5 -62.5 52.5 -57.5 {name=VDDOUT dir=inout}
 B 5 -52.5 -62.5 -47.5 -57.5 {name=VDDIN dir=inout}
-B 5 97.5 -2.5 102.5 2.5 {name=OUT dir=in}
+B 5 97.5 -2.5 102.5 2.5 {name=OUT dir=out}
 B 5 -102.5 -2.5 -97.5 2.5 {name=IN dir=in}
 B 5 -2.5 57.5 2.5 62.5 {name=VGND dir=inout}
 T {@symname} 10.5 44 0 0 0.3 0.3 {}

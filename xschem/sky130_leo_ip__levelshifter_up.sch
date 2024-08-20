@@ -98,7 +98,7 @@ lab=p1}
 C {devices/ipin.sym} 180 230 0 0 {name=p1 lab=IN}
 C {devices/iopin.sym} 180 380 2 0 {name=p3 lab=VGND}
 C {devices/iopin.sym} 180 80 2 0 {name=p5 lab=VDDIN}
-C {devices/ipin.sym} 1340 230 0 1 {name=p4 lab=OUT}
+C {devices/opin.sym} 1340 230 0 0 {name=p4 lab=OUT}
 C {sky130_fd_pr/nfet_01v8.sym} 260 290 0 0 {name=M1
 W=0.42
 L=0.15
