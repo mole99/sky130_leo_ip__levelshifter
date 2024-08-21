@@ -1,4 +1,4 @@
-# sky130_leo_ip__levelshifter
+# sky130_leo_ip__levelshifter ![](../../workflows/cace/badge.svg)
 
 This repository contains two levelshifters: One intented for 1.8V -> 3.3V and another for 3.3V -> 1.8V.
 

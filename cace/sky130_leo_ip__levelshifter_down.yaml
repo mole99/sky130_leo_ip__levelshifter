@@ -2,7 +2,7 @@ name:           sky130_leo_ip__levelshifter_down
 description:    A simple levelshifter intended for 3.3V to 1.8V
 PDK:            sky130A
 
-cace_format:    5.0
+cace_format:    5.2
 
 authorship:
   designer:         Leo Moser
@@ -49,7 +49,7 @@ default_conditions:
     description: Output load capacitance
     display: CLoad
     unit: fF
-    maximum: 10
+    typical: 50
   corner:
     description: Process corner
     display: Corner
@@ -62,110 +62,95 @@ default_conditions:
 
 parameters:
 
-  rise_time:
-    description: Rise time from 10% to 90%
-    display: Rise time
+  rise_fall_time:
+    description: Rise and fall time from 10% to 90%
+    display: Rise and Fall time
     unit: ns
     spec:
-      minimum:
-        value: any
-      typical:
-        value: any
-      maximum:
-        value: any
+      rise:
+        description: Rise time from 10% to 90%
+        display: Rise time
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+      fall:
+        description: Fall time from 10% to 90%
+        display: Fall time
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
     tool:
       ngspice:
         template: rise_fall_down.sch
         format: ascii
         suffix: .data
-        variables: [result, null]
+        variables: [rise, fall]
+    plot:
+      rise_vs_temp:
+        type: xyplot
+        xaxis: temperature
+        yaxis: rise
+      fall_vs_temp:
+        type: xyplot
+        xaxis: temperature
+        yaxis: fall
     conditions:
       cl:
-        minimum: 10
         typical: 50
-        maximum: 100
       corner:
-        enumerate: [tt, ff, ss] # fs, sf
+        enumerate: [tt, ff, ss, fs, sf]
       temperature:
         minimum: -40
         typical: 27
         maximum: 130
 
-  fall_time:
-    description: Fall time from 90% to 10%
-    display: Fall time
-    unit: ns
+  magic_area:
     spec:
-      minimum:
-        value: any
-      typical:
-        value: any
-      maximum:
-        value: any
-    tool:
-      ngspice:
-        template: rise_fall_down.sch
-        format: ascii
-        suffix: .data
-        variables: [null, result]
-    conditions:
-      cl:
-        minimum: 10
-        typical: 50
-        maximum: 100
-      corner:
-        enumerate: [tt, ff, ss] # fs, sf
-      temperature:
-        minimum: -40
-        typical: 27
-        maximum: 130
-
-  area:
-    description: Total circuit layout area
-    display: Area
-    unit: µm²
-    spec:
-      maximum:
-        value: any
+      area:
+        display: Area
+        description: Total circuit layout area
+        unit: µm²
+        maximum:
+          value: any
+      width:
+        display: Width
+        description: Total circuit layout width
+        unit: µm
+        maximum:
+          value: any
+      height:
+        display: Height
+        description: Total circuit layout height
+        unit: µm
+        maximum:
+          value: any
     tool:
       magic_area
-
-  width:
-    description: Total circuit layout width
-    display: Width
-    unit: µm
-    spec:
-      maximum:
-        value: any
-    tool:
-      magic_width
-
-  height:
-    description: Total circuit layout height
-    display: Height
-    unit: µm
-    spec:
-      maximum:
-        value: any
-    tool:
-      magic_height
 
   magic_drc:
     description: Magic DRC
     display: Magic DRC
     spec:
-      maximum:
-        value: 0
+      drc_errors:
+        maximum:
+          value: 0
     tool:
       magic_drc:
-        gds_flatten: True
+        gds_flatten: true
 
   netgen_lvs:
     description: Netgen LVS
     display: Netgen LVS
     spec:
-      maximum:
-        value: 0
+      lvs_errors:
+        maximum:
+          value: 0
     tool:
       netgen_lvs
 
@@ -173,8 +158,9 @@ parameters:
     description: KLayout DRC feol
     display: KLayout DRC feol
     spec:
-      maximum:
-        value: 0
+      drc_errors:
+        maximum:
+          value: 0
     tool:
         klayout_drc:
             args: ['-rd', 'feol=true']
@@ -183,8 +169,9 @@ parameters:
     description: KLayout DRC beol
     display: KLayout DRC beol
     spec:
-      maximum:
-        value: 0
+      drc_errors:
+        maximum:
+          value: 0
     tool:
         klayout_drc:
             args: ['-rd', 'beol=true']
@@ -193,8 +180,9 @@ parameters:
     description: KLayout DRC full
     display: KLayout DRC full
     spec:
-      maximum:
-        value: 0
+      drc_errors:
+        maximum:
+          value: 0
     tool:
         klayout_drc:
             args: ['-rd', 'feol=true', '-rd', 'beol=true', '-rd', 'offgrid=true']

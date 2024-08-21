@@ -50,7 +50,7 @@
   + Description: Output load capacitance
   + Display: CLoad
   + Unit: fF
-  + Maximum: 10
+  + Typical: 50
 - corner
   + Description: Process corner
   + Display: Corner

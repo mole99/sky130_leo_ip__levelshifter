@@ -51,8 +51,8 @@ lab=in}
 N 420 160 520 160 {
 lab=in}
 C {sky130_leo_ip__levelshifter_down.sym} 620 160 0 0 {name=x1}
-C {devices/vsource.sym} 120 130 0 0 {name=V1 value=\{vddin\} savecurrent=false}
-C {devices/vsource.sym} 180 130 0 0 {name=V2 value=\{vddout\} savecurrent=false}
+C {devices/vsource.sym} 120 130 0 0 {name=V1 value=CACE\{vddin\} savecurrent=false}
+C {devices/vsource.sym} 180 130 0 0 {name=V2 value=CACE\{vddout\} savecurrent=false}
 C {devices/gnd.sym} 60 200 0 0 {name=l1 lab=GND}
 C {devices/vsource.sym} 60 130 0 0 {name=V3 value=0 savecurrent=false}
 C {devices/lab_pin.sym} 60 100 1 0 {name=p1 sig_type=std_logic lab=VGND}
@@ -63,7 +63,7 @@ C {devices/lab_pin.sym} 570 100 1 0 {name=p6 sig_type=std_logic lab=VDDIN}
 C {devices/lab_pin.sym} 670 100 1 0 {name=p7 sig_type=std_logic lab=VDDOUT}
 C {devices/capa.sym} 860 210 0 0 {name=C1
 m=1
-value=10f
+value=CACE\{cl\}
 footprint=1206
 device="ceramic capacitor"}
 C {devices/lab_pin.sym} 860 260 3 0 {name=p2 sig_type=std_logic lab=VGND}
@@ -108,26 +108,24 @@ value="
 
     print rise_time fall_time
 
-    echo $&rise_time $&fall_time > \{simpath\}/\{filename\}_\{N\}.data
+    echo $&rise_time $&fall_time > CACE\{simpath\}/CACE\{filename\}_CACE\{N\}.data
 
 .endc
 "}
-
 C {devices/code_shown.sym} 880 60 0 0 {name=SETUP
 simulator=ngspice
 only_toplevel=false
 value="
-.lib \{PDK_ROOT\}/\{PDK\}/libs.tech/combined/sky130.lib.spice \{corner\}
+.lib CACE\{PDK_ROOT\}/CACE\{PDK\}/libs.tech/combined/sky130.lib.spice CACE\{corner\}
 
-.include \{DUT_path\}
+.include CACE\{DUT_path\}
 
-.temp \{temperature\}
+.temp CACE\{temperature\}
 
-.option SEED=[\{seed=12345\} + \{iterations=0\}]
+.option SEED=CACE[CACE\{seed=12345\} + CACE\{iterations=0\}]
 
 * Flag unsafe operating conditions (exceeds models' specified limits)
 .option warn=1
 "}
-
 C {devices/lab_wire.sym} 420 160 0 0 {name=p10 sig_type=std_logic lab=in}
-C {devices/vsource.sym} 420 210 0 0 {name=V5 value="pulse 0 \{vddin\} 0 100p 100p 10n 20n" savecurrent=false}
+C {devices/vsource.sym} 420 210 0 0 {name=V5 value="pulse 0 CACE\{vddin\} 0 100p 100p 10n 20n" savecurrent=false}
