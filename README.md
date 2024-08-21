@@ -5,8 +5,15 @@ This repository contains two levelshifters: One intented for 1.8V -> 3.3V and an
 > [!IMPORTANT]  
 > This is a very simple design and should only be used as a reference.
 
-- [Documentation sky130_leo_ip__levelshifter_down](docs/sky130_leo_ip__levelshifter_down/sky130_leo_ip__levelshifter_down.md)
-- [Documentation sky130_leo_ip__levelshifter_up](docs/sky130_leo_ip__levelshifter_up/sky130_leo_ip__levelshifter_up.md)
+**`sky130_leo_ip__levelshifter_down`**:
+
+- [Documentation](docs/sky130_leo_ip__levelshifter_down/sky130_leo_ip__levelshifter_down.md)
+- [Characterization](docs/sky130_leo_ip__levelshifter_down/sky130_leo_ip__levelshifter_down_rcx.md)
+
+**`sky130_leo_ip__levelshifter_up`**:
+
+- [Documentation ](docs/sky130_leo_ip__levelshifter_up/sky130_leo_ip__levelshifter_up.md)
+- [Characterization ](docs/sky130_leo_ip__levelshifter_up/sky130_leo_ip__levelshifter_up_rcx.md)
 
 ## CACE
 
